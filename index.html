@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arte de Itzel | Cuadros hechos con amor</title>
+
+  <style>
+    :root {
+      --cream: #fff7e8;
+      --pink: #ffb6c8;
+      --yellow: #ffd86b;
+      --blue: #8bd3ff;
+      --purple: #bca7ff;
+      --green: #a8e6a1;
+      --ink: #2f2f3a;
+      --muted: #686878;
+      --white: #ffffff;
+      --shadow: 0 18px 40px rgba(60, 45, 80, 0.16);
+      --radius: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background:
+        radial-gradient(circle at top left, #ffe2ec 0, transparent 28%),
+        radial-gradient(circle at top right, #d7f1ff 0, transparent 30%),
+        var(--cream);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 247, 232, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+    }
+
+    .nav {
+      max-width: 1180px;
+      margin: auto;
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      font-size: 1.2rem;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--yellow), var(--blue));
+      display: grid;
+      place-items: center;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 24px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.25s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #ff8fb3, #ffd166);
+      color: #3a2430;
+    }
+
+    .btn-secondary {
+      background: var(--white);
+      color: var(--ink);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px) scale(1.02);
+    }
+
+    .hero {
+      min-height: 90vh;
+      max-width: 1180px;
+      margin: auto;
+      padding: 80px 22px 60px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .badge {
+      display: inline-flex;
+      background: #fff;
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-weight: 800;
+      color: #8c5a00;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 7vw, 6.6rem);
+      line-height: 0.95;
+      letter-spacing: -3px;
+      margin-bottom: 24px;
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, #ff7fa5, #8bd3ff, #ffd166);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.18rem;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 620px;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .art-stage {
+      position: relative;
+      height: 520px;
+      display: grid;
+      place-items: center;
+    }
+
+    .paint-sun {
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffd166, #ff8fab);
+      top: 20px;
+      right: 40px;
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .cloud {
+      position: absolute;
+      background: white;
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+      animation: drift 8s ease-in-out infinite;
+    }
+
+    .cloud::before,
+    .cloud::after {
+      content: "";
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+    }
+
+    .cloud.one {
+      width: 150px;
+      height: 52px;
+      top: 80px;
+      left: 20px;
+    }
+
+    .cloud.one::before {
+      width: 70px;
+      height: 70px;
+      left: 20px;
+      top: -30px;
+    }
+
+    .cloud.one::after {
+      width: 58px;
+      height: 58px;
+      right: 24px;
+      top: -22px;
+    }
+
+    .canvas-card {
+      width: min(380px, 90%);
+      height: 440px;
+      background: white;
+      border-radius: 34px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      transform: rotate(-3deg);
+      animation: entrance 1.4s ease both, floatCanvas 5s ease-in-out infinite 1.4s;
+      position: relative;
+      z-index: 3;
+    }
+
+    .canvas-inner {
+      height: 100%;
+      border-radius: 24px;
+      background:
+        linear-gradient(to top, #6ecb8f 0 20%, #ffd166 20% 45%, #ff8fab 45% 70%, #8bd3ff 70% 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mountain {
+      position: absolute;
+      bottom: 80px;
+      width: 220px;
+      height: 160px;
+      background: #7c69c9;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    }
+
+    .mountain.left {
+      left: -40px;
+    }
+
+    .mountain.right {
+      right: -60px;
+      background: #9b8cff;
+    }
+
+    .animal {
+      position: absolute;
+      bottom: 48px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 140px;
+      height: 95px;
+      background: #fff4df;
+      border-radius: 60px 60px 42px 42px;
+      box-shadow: inset 0 -8px 0 rgba(0, 0, 0, 0.05);
+    }
+
+    .animal::before,
+    .animal::after {
+      content: "";
+      position: absolute;
+      width: 42px;
+      height: 42px;
+      background: #fff4df;
+      border-radius: 50%;
+      top: -22px;
+    }
+
+    .animal::before {
+      left: 18px;
+    }
+
+    .animal::after {
+      right: 18px;
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: #fff;
+      clip-path: polygon(50% 0%, 62% 35%, 100% 50%, 62% 65%, 50% 100%, 38% 65%, 0% 50%, 38% 35%);
+      animation: twinkle 1.6s infinite alternate;
+    }
+
+    .sparkle.s1 {
+      top: 70px;
+      left: 70px;
+    }
+
+    .sparkle.s2 {
+      top: 120px;
+      right: 80px;
+      animation-delay: .4s;
+    }
+
+    .sparkle.s3 {
+      bottom: 140px;
+      left: 105px;
+      animation-delay: .8s;
+    }
+
+    /* =========================================
+   HERO - CUADRO REAL DEL GATO
+   ========================================= */
+
+    .art-stage {
+      position: relative;
+      height: 540px;
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+    }
+
+
+    /* CUADRO PRINCIPAL */
+
+    .cat-canvas {
+      width: min(430px, 88%);
+      height: auto;
+      aspect-ratio: 4 / 5;
+
+      padding: 18px;
+
+      background: rgba(255, 255, 255, 0.92);
+
+      border-radius: 34px;
+
+      box-shadow:
+        0 30px 70px rgba(60, 45, 80, 0.18),
+        0 8px 25px rgba(60, 45, 80, 0.10);
+
+      position: relative;
+      z-index: 5;
+
+      transform: rotate(-2deg);
+
+      animation:
+        entrance 1.4s ease both,
+        catFloat 6s ease-in-out infinite 1.4s;
+    }
+
+
+    /* CONTENEDOR DE LA FOTO */
+
+    .cat-canvas-inner {
+      width: 100%;
+      height: 100%;
+
+      background: #f8f5f2;
+
+      border-radius: 24px;
+
+      overflow: hidden;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      position: relative;
+    }
+
+
+    /* FOTO REAL DEL GATO */
+
+    .hero-cat-image {
+      width: 100%;
+      height: 100%;
+
+      object-fit: contain;
+
+      display: block;
+
+      border-radius: 20px;
+    }
+
+
+    /* Marco interior */
+
+    .cat-canvas-inner::after {
+      content: "";
+
+      position: absolute;
+
+      inset: 12px;
+
+      border: 2px solid rgba(255, 255, 255, 0.72);
+
+      border-radius: 16px;
+
+      pointer-events: none;
+    }
+
+
+    /* =========================================
+   PINCELADAS
+   ========================================= */
+
+    .hero-brush {
+      position: absolute;
+
+      z-index: 1;
+
+      opacity: 0.65;
+
+      filter: blur(0.2px);
+
+      pointer-events: none;
+
+      border-radius:
+        65% 35% 60% 40% / 45% 60% 40% 55%;
+    }
+
+
+    /* ROSA */
+
+    .brush-pink {
+      width: 290px;
+      height: 82px;
+
+      background: #ffb6c8;
+
+      top: 65px;
+      right: -5px;
+
+      transform: rotate(-12deg);
+
+      animation: brushPinkMove 8s ease-in-out infinite;
+    }
+
+
+    /* AZUL */
+
+    .brush-blue {
+      width: 270px;
+      height: 75px;
+
+      background: #8bd3ff;
+
+      bottom: 70px;
+      left: -15px;
+
+      transform: rotate(12deg);
+
+      animation: brushBlueMove 9s ease-in-out infinite;
+    }
+
+
+    /* AMARILLO */
+
+    .brush-yellow {
+      width: 190px;
+      height: 65px;
+
+      background: #ffd86b;
+
+      top: 185px;
+      left: -10px;
+
+      transform: rotate(-25deg);
+
+      animation: brushYellowMove 7s ease-in-out infinite;
+    }
+
+
+    /* MORADO */
+
+    .brush-purple {
+      width: 220px;
+      height: 70px;
+
+      background: #bca7ff;
+
+      right: -10px;
+      bottom: 150px;
+
+      transform: rotate(23deg);
+
+      animation: brushPurpleMove 10s ease-in-out infinite;
+    }
+
+
+    /* VERDE */
+
+    .brush-green {
+      width: 180px;
+      height: 60px;
+
+      background: #a8e6a1;
+
+      top: 25px;
+      left: 70px;
+
+      transform: rotate(17deg);
+
+      animation: brushGreenMove 9s ease-in-out infinite;
+    }
+
+
+    /* =========================================
+   GOTITAS DE PINTURA
+   ========================================= */
+
+    .hero-dot {
+      position: absolute;
+
+      border-radius: 50%;
+
+      z-index: 2;
+
+      opacity: 0.85;
+
+      pointer-events: none;
+
+      animation: heroDotFloat 5s ease-in-out infinite;
+    }
+
+
+    .dot-pink {
+      width: 18px;
+      height: 18px;
+
+      background: #ff8fab;
+
+      top: 105px;
+      left: 35px;
+    }
+
+
+    .dot-blue {
+      width: 13px;
+      height: 13px;
+
+      background: #8bd3ff;
+
+      right: 25px;
+      top: 250px;
+
+      animation-delay: -2s;
+    }
+
+
+    .dot-yellow {
+      width: 15px;
+      height: 15px;
+
+      background: #ffd166;
+
+      bottom: 80px;
+      right: 65px;
+
+      animation-delay: -3s;
+    }
+
+
+    /* =========================================
+   ANIMACIÓN DEL CUADRO
+   ========================================= */
+
+    @keyframes catFloat {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(-2deg);
+      }
+
+      50% {
+        transform: translateY(-14px) rotate(1deg);
+      }
+    }
+
+
+    /* =========================================
+   ANIMACIONES PINCELADAS
+   ========================================= */
+
+    @keyframes brushPinkMove {
+
+      0%,
+      100% {
+        transform: translate(0, 0) rotate(-12deg) scale(1);
+      }
+
+      50% {
+        transform: translate(-20px, 12px) rotate(-7deg) scale(1.06);
+      }
+    }
+
+
+    @keyframes brushBlueMove {
+
+      0%,
+      100% {
+        transform: translate(0, 0) rotate(12deg);
+      }
+
+      50% {
+        transform: translate(20px, -14px) rotate(17deg);
+      }
+    }
+
+
+    @keyframes brushYellowMove {
+
+      0%,
+      100% {
+        transform: translate(0, 0) rotate(-25deg);
+      }
+
+      50% {
+        transform: translate(15px, 12px) rotate(-18deg);
+      }
+    }
+
+
+    @keyframes brushPurpleMove {
+
+      0%,
+      100% {
+        transform: translate(0, 0) rotate(23deg);
+      }
+
+      50% {
+        transform: translate(-17px, -12px) rotate(17deg);
+      }
+    }
+
+
+    @keyframes brushGreenMove {
+
+      0%,
+      100% {
+        transform: translate(0, 0) rotate(17deg);
+      }
+
+      50% {
+        transform: translate(15px, 10px) rotate(23deg);
+      }
+    }
+
+
+    @keyframes heroDotFloat {
+
+      0%,
+      100% {
+        transform: translateY(0) scale(1);
+      }
+
+      50% {
+        transform: translateY(-15px) scale(1.18);
+      }
+    }
+
+    section {
+      max-width: 1180px;
+      margin: auto;
+      padding: 80px 22px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 18px;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      letter-spacing: -1px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--muted);
+      max-width: 680px;
+      margin: 0 auto 42px;
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+
+    .filter-btn {
+      border: 0;
+      background: white;
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-weight: 800;
+      cursor: pointer;
+      color: var(--muted);
+      box-shadow: 0 10px 26px rgba(60, 45, 80, 0.09);
+    }
+
+    .filter-btn.active {
+      background: var(--ink);
+      color: white;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(360px, 1.25fr);
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    /* TARJETAS */
+    .product {
+      background: rgba(255, 255, 255, 0.94);
+      border-radius: 26px;
+      padding: 16px;
+      box-shadow: 0 16px 40px rgba(60, 45, 80, 0.11);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .product:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 22px 50px rgba(60, 45, 80, 0.17);
+    }
+
+    /* IMÁGENES NORMALES */
+    .art-preview {
+      height: 245px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+      position: relative;
+      overflow: hidden;
+      background: #f8f5f2;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .art-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .product:hover .art-preview img {
+      transform: scale(1.035);
+    }
+
+    /* Marco decorativo */
+    .art-preview::after {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border: 2px solid rgba(255, 255, 255, 0.78);
+      border-radius: 15px;
+      pointer-events: none;
+    }
+
+    /* TEXTOS */
+    .product h3 {
+      font-size: 1.2rem;
+      margin-bottom: 7px;
+    }
+
+    .product p {
+      color: var(--muted);
+      line-height: 1.55;
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+    }
+
+    /* Empuja precio/botón al fondo */
+    .price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: auto;
+    }
+
+    .price {
+      font-weight: 900;
+      font-size: 1.08rem;
+      color: #e35f8d;
+    }
+
+    .small-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      background: #25d366;
+      color: white;
+
+      border-radius: 999px;
+      padding: 10px 18px;
+
+      font-weight: 900;
+      font-size: 0.9rem;
+
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .small-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(37, 211, 102, 0.28);
+    }
+
+
+    /* =========================================
+   GATITO - OBRA DESTACADA
+   ========================================= */
+
+    .product.featured {
+      grid-column: 3;
+      grid-row: 1 / span 2;
+
+      padding: 20px;
+      border-radius: 32px;
+
+      background:
+        radial-gradient(circle at top right, rgba(255, 182, 200, 0.20), transparent 35%),
+        white;
+
+      box-shadow: 0 22px 55px rgba(60, 45, 80, 0.16);
+    }
+
+    .product.featured .art-preview {
+      height: 590px;
+      margin-bottom: 22px;
+      border-radius: 24px;
+    }
+
+    .product.featured .art-preview img {
+      object-fit: contain;
+    }
+
+    .product.featured h3 {
+      font-size: 1.65rem;
+      margin-bottom: 10px;
+    }
+
+    .product.featured p {
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .product.featured .price {
+      font-size: 1.3rem;
+    }
+
+
+    /* =========================================
+   RESPONSIVE
+   ========================================= */
+
+    @media (max-width: 1000px) {
+      .gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: auto;
+      }
+
+      .product.featured {
+        grid-column: 1 / -1;
+        grid-row: auto;
+      }
+
+      .product.featured .art-preview {
+        height: 500px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .gallery {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .product.featured {
+        grid-column: auto;
+      }
+
+      .art-preview,
+      .product.featured .art-preview {
+        height: 360px;
+      }
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 36px;
+      align-items: center;
+      background: white;
+      border-radius: 40px;
+      padding: 36px;
+      box-shadow: var(--shadow);
+    }
+
+    .about-card {
+      min-height: 330px;
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at 30% 30%, #ffd166 0 12%, transparent 13%),
+        radial-gradient(circle at 70% 50%, #ff8fab 0 14%, transparent 15%),
+        radial-gradient(circle at 45% 75%, #8bd3ff 0 16%, transparent 17%),
+        linear-gradient(135deg, #fff1f7, #eef8ff);
+      display: grid;
+      place-items: center;
+      font-size: 5rem;
+    }
+
+    .about h2 {
+      font-size: 2.5rem;
+      margin-bottom: 18px;
+    }
+
+    .about p {
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 30px;
+    }
+
+    .step {
+      background: white;
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .step span {
+      font-size: 2.5rem;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .cta {
+      text-align: center;
+      background: linear-gradient(135deg, #ffe0ec, #dff5ff, #fff2bd);
+      border-radius: 42px;
+      padding: 70px 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .cta h2 {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      margin-bottom: 16px;
+    }
+
+    .cta p {
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 auto 28px;
+      line-height: 1.7;
+    }
+
+    footer {
+      text-align: center;
+      padding: 34px 20px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .intro-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 182, 200, 0.65) 0 12%, transparent 13%),
+        radial-gradient(circle at 78% 28%, rgba(139, 211, 255, 0.65) 0 14%, transparent 15%),
+        radial-gradient(circle at 50% 78%, rgba(255, 216, 107, 0.75) 0 16%, transparent 17%),
+        var(--cream);
+      animation: introFadeOut 0.9s ease forwards;
+      animation-delay: 3.1s;
+    }
+
+    .intro-card {
+      position: relative;
+      width: min(520px, 88%);
+      min-height: 330px;
+      border-radius: 42px;
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 28px 70px rgba(60, 45, 80, 0.22);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      text-align: center;
+      padding: 36px 24px;
+      animation: introPop 1s ease both;
+    }
+
+    .intro-card::before {
+      content: "";
+      position: absolute;
+      width: 160%;
+      height: 34px;
+      background: linear-gradient(90deg, transparent, #ff8fab, #ffd166, #8bd3ff, transparent);
+      transform: rotate(-18deg) translateX(-90%);
+      animation: brushStroke 2.2s ease forwards;
+      animation-delay: 0.45s;
+      opacity: 0.85;
+    }
+
+    .intro-card h2 {
+      position: relative;
+      z-index: 2;
+      font-size: clamp(2.6rem, 7vw, 5.2rem);
+      line-height: 1;
+      letter-spacing: -2px;
+      background: linear-gradient(135deg, #ff7fa5, #8bd3ff, #ffd166);
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-top: 22px;
+      animation: titleReveal 1s ease both;
+      animation-delay: 1.35s;
+    }
+
+    .intro-card p {
+      position: relative;
+      z-index: 2;
+      margin-top: 14px;
+      color: var(--muted);
+      font-weight: 800;
+      animation: introSoftUp 0.8s ease both;
+      animation-delay: 1.65s;
+    }
+
+    .intro-brush {
+      position: absolute;
+      top: 35px;
+      left: 40px;
+      font-size: 3.8rem;
+      z-index: 3;
+      animation: brushDance 2.4s ease-in-out infinite;
+    }
+
+    .intro-palette {
+      position: relative;
+      z-index: 2;
+      font-size: 5.2rem;
+      animation: paletteBounce 1.5s ease-in-out infinite;
+    }
+
+    .paint-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(1px);
+      opacity: 0.85;
+      animation: blobFloat 4s ease-in-out infinite;
+    }
+
+    .blob-1 {
+      width: 190px;
+      height: 190px;
+      background: #ffb6c8;
+      top: 12%;
+      left: 10%;
+    }
+
+    .blob-2 {
+      width: 240px;
+      height: 240px;
+      background: #8bd3ff;
+      right: 8%;
+      top: 18%;
+      animation-delay: 0.4s;
+    }
+
+    .blob-3 {
+      width: 210px;
+      height: 210px;
+      background: #ffd86b;
+      bottom: 10%;
+      left: 42%;
+      animation-delay: 0.8s;
+    }
+
+    @keyframes introFadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+    }
+
+    @keyframes introPop {
+      from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.82) rotate(-3deg);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(0);
+      }
+    }
+
+    @keyframes brushStroke {
+      from {
+        transform: rotate(-18deg) translateX(-90%);
+      }
+
+      to {
+        transform: rotate(-18deg) translateX(90%);
+      }
+    }
+
+    @keyframes titleReveal {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.92);
+        filter: blur(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+    }
+
+    @keyframes introSoftUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes brushDance {
+
+      0%,
+      100% {
+        transform: rotate(-18deg) translateY(0);
+      }
+
+      50% {
+        transform: rotate(8deg) translateY(-10px);
+      }
+    }
+
+    @keyframes paletteBounce {
+
+      0%,
+      100% {
+        transform: translateY(0) scale(1);
+      }
+
+      50% {
+        transform: translateY(-10px) scale(1.08);
+      }
+    }
+
+    @keyframes blobFloat {
+
+      0%,
+      100% {
+        transform: translateY(0) scale(1);
+      }
+
+      50% {
+        transform: translateY(-22px) scale(1.08);
+      }
+    }
+
+    @keyframes entrance {
+      from {
+        opacity: 0;
+        transform: translateY(60px) scale(.8) rotate(-10deg);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(-3deg);
+      }
+    }
+
+    @keyframes floatCanvas {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(-3deg);
+      }
+
+      50% {
+        transform: translateY(-18px) rotate(2deg);
+      }
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0) scale(1);
+      }
+
+      50% {
+        transform: translateY(-18px) scale(1.06);
+      }
+    }
+
+    @keyframes drift {
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      50% {
+        transform: translateX(22px);
+      }
+    }
+
+    @keyframes twinkle {
+      from {
+        opacity: .35;
+        transform: scale(.8) rotate(0);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1.25) rotate(20deg);
+      }
+    }
+
+    @media (max-width: 900px) {
+
+      .hero,
+      .about {
+        grid-template-columns: 1fr;
+      }
+
+      .art-stage {
+        height: 460px;
+      }
+
+      .gallery,
+      .steps {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 620px) {
+
+      .gallery,
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 50px;
+      }
+
+      .canvas-card {
+        height: 390px;
+      }
+
+      .about {
+        padding: 24px;
+      }
+    }
+
+    /* HERO RESPONSIVE */
+
+    @media (max-width: 900px) {
+
+      .art-stage {
+        height: 520px;
+      }
+
+      .cat-canvas {
+        width: min(410px, 78vw);
+        height: auto;
+      }
+    }
+
+
+    @media (max-width: 620px) {
+
+      .art-stage {
+        height: 430px;
+      }
+
+      .cat-canvas {
+        width: min(320px, 78vw);
+        height: auto;
+        padding: 12px;
+        border-radius: 25px;
+      }
+
+      .cat-canvas-inner {
+        border-radius: 18px;
+      }
+
+      .brush-pink {
+        width: 190px;
+      }
+
+      .brush-blue {
+        width: 180px;
+      }
+
+      .brush-yellow {
+        width: 130px;
+      }
+
+      .brush-purple {
+        width: 150px;
+      }
+
+      .brush-green {
+        width: 125px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="intro-loader">
+    <div class="paint-blob blob-1"></div>
+    <div class="paint-blob blob-2"></div>
+    <div class="paint-blob blob-3"></div>
+
+    <div class="intro-card">
+      <div class="intro-palette">🎨</div>
+      <h2>Arte de Itzel</h2>
+      <p>Preparando una galería llena de color...</p>
+    </div>
+  </div>
+
+  <header>
+    <nav class="nav">
+      <a href="#" class="logo">
+        <span class="logo-icon">🎨</span>
+        Arte de Itzel
+      </a>
+
+      <div class="nav-links">
+        <a href="#galeria">Galería</a>
+        <a href="#itzel">Sobre Itzel</a>
+        <a href="#comprar">Comprar</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="badge">Cuadros únicos hechos a mano</div>
+
+        <h1>
+          Pequeño arte, <br />
+          <span>grandes historias</span>
+        </h1>
+
+        <p>
+          Bienvenido a la galería de Itzel, una pequeña artista que ama crear cuadros llenos de color,
+          ternura e imaginación. Sus obras suelen inspirarse en animales, atardeceres, naturaleza y mundos
+          mágicos. Cada cuadro es único y está hecho con mucho cariño.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#galeria" class="btn btn-primary">Ver cuadros disponibles</a>
+          <a href="#comprar" class="btn btn-secondary">Encargar uno especial</a>
+        </div>
+      </div>
+
+      <div class="art-stage">
+
+        <!-- Pinceladas pastel animadas -->
+        <div class="hero-brush brush-pink"></div>
+        <div class="hero-brush brush-blue"></div>
+        <div class="hero-brush brush-yellow"></div>
+        <div class="hero-brush brush-purple"></div>
+        <div class="hero-brush brush-green"></div>
+
+        <!-- Manchitas decorativas -->
+        <span class="hero-dot dot-pink"></span>
+        <span class="hero-dot dot-blue"></span>
+        <span class="hero-dot dot-yellow"></span>
+
+        <!-- Obra principal -->
+        <div class="canvas-card cat-canvas">
+          <div class="canvas-inner cat-canvas-inner">
+            <img src="./cuadros/gato.png" alt="Cuadro de gato pintado por Itzel" class="hero-cat-image">
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="galeria">
+      <h2 class="section-title">Galería de cuadros</h2>
+      <p class="section-subtitle">
+        Aquí puedes ver algunos estilos de cuadros que Itzel puede hacer. Puedes cambiar los textos,
+        precios e imágenes cuando tengas fotos reales de sus obras.
+      </p>
+
+      <!--<div class="filters">
+        <button class="filter-btn active" data-filter="all">Todos</button>
+        <button class="filter-btn" data-filter="animals">Animales</button>
+        <button class="filter-btn" data-filter="sunset">Atardeceres</button>
+        <button class="filter-btn" data-filter="nature">Naturaleza</button>
+        <button class="filter-btn" data-filter="abstract">Creativos</button>
+      </div>-->
+
+      <div class="gallery">
+
+        <!-- PERRITO -->
+        <article class="product">
+
+          <div class="art-preview">
+            <img src="./cuadros/perrito.png" alt="Cuadro de perrito pintado por Itzel">
+          </div>
+
+          <h3>Perrito</h3>
+
+          <p>
+            Una tierna pintura llena de color y personalidad,
+            creada a mano por Itzel.
+          </p>
+
+          <div class="price-row">
+
+            <span class="price">$2,000 MXN</span>
+
+            <a class="small-btn" target="_blank" rel="noopener noreferrer"
+              href="https://web.whatsapp.com/send?phone=523334615476&text=Hola%2C%20me%20interesa%20el%20cuadro%20Perrito.%20%C2%BFMe%20puedes%20dar%20m%C3%A1s%20informaci%C3%B3n%3F">
+              Pedir
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- FÉNIX -->
+        <article class="product">
+
+          <div class="art-preview">
+            <img src="./cuadros/fenix.png" alt="Cuadro de fénix pintado por Itzel">
+          </div>
+
+          <h3>Fénix</h3>
+
+          <p>
+            Una obra llena de energía y colores intensos,
+            inspirada en la fuerza de un fénix.
+          </p>
+
+          <div class="price-row">
+
+            <span class="price">$2,000 MXN</span>
+
+            <a class="small-btn" target="_blank" rel="noopener noreferrer"
+              href="https://web.whatsapp.com/send?phone=523334615476&text=Hola%2C%20me%20interesa%20el%20cuadro%20F%C3%A9nix.%20%C2%BFMe%20puedes%20dar%20m%C3%A1s%20informaci%C3%B3n%3F">
+              Pedir
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- PECES KOI -->
+        <article class="product">
+
+          <div class="art-preview">
+            <img src="./cuadros/koi.png" alt="Cuadro de peces koi pintado por Itzel">
+          </div>
+
+          <h3>Peces Koi</h3>
+
+          <p>
+            Una pintura colorida inspirada en el movimiento
+            y la belleza de los peces koi.
+          </p>
+
+          <div class="price-row">
+
+            <span class="price">$2,000 MXN</span>
+
+            <a class="small-btn" target="_blank" rel="noopener noreferrer"
+              href="https://web.whatsapp.com/send?phone=523334615476&text=Hola%2C%20me%20interesa%20el%20cuadro%20Peces%20Koi.%20%C2%BFMe%20puedes%20dar%20m%C3%A1s%20informaci%C3%B3n%3F">
+              Pedir
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- ÁGUILA -->
+        <article class="product">
+
+          <div class="art-preview">
+            <img src="./cuadros/aguila.png" alt="Cuadro de águila pintado por Itzel">
+          </div>
+
+          <h3>Águila</h3>
+
+          <p>
+            Una obra inspirada en la fuerza y
+            majestuosidad del águila.
+          </p>
+
+          <div class="price-row">
+
+            <span class="price">$2,000 MXN</span>
+
+            <a class="small-btn" target="_blank" rel="noopener noreferrer"
+              href="https://web.whatsapp.com/send?phone=523334615476&text=Hola%2C%20me%20interesa%20el%20cuadro%20%C3%81guila.%20%C2%BFMe%20puedes%20dar%20m%C3%A1s%20informaci%C3%B3n%3F">
+              Pedir
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- GATITO - OBRA DESTACADA -->
+        <article class="product featured" data-category="animals">
+
+          <div class="art-preview">
+            <img src="./cuadros/gato.png" alt="Cuadro de gato pintado por Itzel">
+          </div>
+
+          <h3>Gatito</h3>
+
+          <p>
+            Un retrato lleno de ternura y expresión,
+            pintado a mano con mucho cariño por Itzel.
+          </p>
+
+          <div class="price-row">
+
+            <span class="price">$2,000 MXN</span>
+
+            <a class="small-btn" target="_blank" rel="noopener noreferrer"
+              href="https://web.whatsapp.com/send?phone=523334615476&text=Hola%2C%20me%20interesa%20el%20cuadro%20Gatito.%20%C2%BFMe%20puedes%20dar%20m%C3%A1s%20informaci%C3%B3n%3F">
+              Pedir
+            </a>
+
+          </div>
+
+        </article>
+
+      </div>
+    </section>
+
+    <section id="itzel">
+      <div class="about">
+        <div class="about-card">
+          🖌️
+        </div>
+
+        <div>
+          <h2>Conoce a Itzel</h2>
+          <p>
+            Itzel es una pequeña artista con una imaginación enorme. Le encanta pintar cuadros llenos de vida,
+            especialmente animales, atardeceres, paisajes y escenas coloridas.
+          </p>
+          <p>
+            Sus cuadros no buscan ser perfectos: buscan transmitir alegría, ternura y creatividad. Cada pieza
+            tiene su propio encanto y puede convertirse en un regalo especial o en una decoración única.
+          </p>
+          <a href="#comprar" class="btn btn-primary">Quiero apoyar su arte</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">¿Cómo comprar?</h2>
+      <p class="section-subtitle">
+        El proceso puede ser muy sencillo para que familiares, amigos y nuevos clientes puedan pedir sus cuadros.
+      </p>
+
+      <div class="steps">
+        <div class="step">
+          <span>1️⃣</span>
+          <h3>Elige un cuadro</h3>
+          <p>Revisa la galería y selecciona el cuadro que más te guste.</p>
+        </div>
+
+        <div class="step">
+          <span>2️⃣</span>
+          <h3>Escribe por WhatsApp</h3>
+          <p>Pregunta disponibilidad, medidas, precio o detalles personalizados.</p>
+        </div>
+
+        <div class="step">
+          <span>3️⃣</span>
+          <h3>Recibe tu obra</h3>
+          <p>Coordina entrega, pago y disfruta un cuadro hecho con mucho cariño.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="comprar">
+      <div class="cta">
+        <h2>¿Quieres un cuadro especial?</h2>
+        <p>
+          Puedes pedir un cuadro personalizado de animales, atardeceres, naturaleza o una idea creativa.
+          Itzel no suele pintar personas, pero sí puede crear mundos llenos de color.
+        </p>
+
+        <a class="btn btn-primary" target="_blank"
+          href="https://wa.me/523336624226?text=Hola,%20me%20gustaría%20pedir%20información%20sobre%20los%20cuadros%20de%20Itzel">
+          Pedir por WhatsApp
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 Arte de Itzel · Cuadros hechos con imaginación y amor
+  </footer>
+
+  <script>
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        const intro = document.querySelector(".intro-loader");
+        if (intro) {
+          intro.remove();
+        }
+      }, 4300);
+    });
+
+  </script>
+
+</body>
+
+</html>
